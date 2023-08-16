@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:
+  vault:
+    image: vault:1.13.3
+    container_name: vault
+    restart: unless-stopped
+    ports:
+      - "8200:8200"
+    cap_add:
+      - IPC_LOCK
+    volumes:
+      - ./logs:/vault/logs      # Mount volume for audit logs
+      - ./vault_data:/vault/file      # Mount volume for storage data
+      - ./config:/vault/config  # Mount volume for configuration
+#    command: server -dev
